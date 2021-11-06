@@ -1,12 +1,15 @@
 sudo: false
 language: node_js
 node_js:
-  - 10 # use nodejs v10 LTS
+  - "14" # use nodejs v14 LTS 
 cache: npm
 branches:
   only:
     - master # build master branch only
+install:
+  - yarn
 script:
+  - hexo clean # clean static files
   - hexo generate # generate static files
 deploy:
   provider: pages
@@ -14,5 +17,5 @@ deploy:
   github-token: $GH_TOKEN
   keep-history: true
   on:
-    branch: master
+    branch: gh-pages
   local-dir: public
